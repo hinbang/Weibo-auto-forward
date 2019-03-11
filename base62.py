@@ -60,6 +60,6 @@ def base62_decode(string, alphabet=ALPHABET):
     return num
 
 if __name__ == '__main__':
-    a = str2mid('HjodQzutN')
+    a = str2mid('HjLQjzPcP')
     print(a)
     

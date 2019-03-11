@@ -1,9 +1,5 @@
 # _*_ coding: utf-8 _*_
 
-"""
-python_weibo.py by xianhu
-"""
-
 import re
 import rsa
 import time
@@ -13,6 +9,8 @@ import logging
 import binascii
 import requests
 import urllib.parse
+import pytesseract
+from PIL import Image
 
 class WeiBoLogin(object):
     """
@@ -76,6 +74,8 @@ class WeiBoLogin(object):
             with open("captcha.jpeg", "wb") as file_out:
                 file_out.write(self.session.get(url).content)
             code = input("请输入验证码:")
+            #im = Image.open("Weibo-auto-forward/captcha.jpeg")
+            #code = pytesseract.image_to_string(im)
             post_data["pcid"] = json_data["pcid"]
             post_data["door"] = code
 
@@ -167,8 +167,7 @@ class WeiBoLogin(object):
         jsontext = resp.text
         json_text = json.dumps(jsontext)
         print(json_text)
-        if resp.status_code == 200 :
-            print('微博发布成功')
+        resp.status_code == 200 
     
     ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -235,11 +234,15 @@ class WeiBoLogin(object):
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG, format="%(asctime)s\t%(levelname)s\t%(message)s")
     weibo = WeiBoLogin()
-    weibo.login("583123293@qq.com", 'xuanbang.5182083')
     # mid = weibo.url_to_mid()
-    weibo.forward(4346213468458647,'黄星你真胖1')
-    time.sleep(5)
-    weibo.forward(4346213468458647,'黄星你是胖胖2')
-    time.sleep(5)
-    weibo.forward(4346213468458647,'黄星你是胖胖胖2')
+    for num in range(0,10):
+        weibo.login("17876592538", 'vxw85640')
+        weibo.forward(4347121438538319,'彼此将就的人背靠着背，无话可讲+'+str(num))
+        #weibo.forward(4347121438538319,'期待郁可唯这张专辑+'+str(num))
+        weibo.login("13725228642", 'wtq50829')
+        weibo.forward(4347121438538319,'彼此将就的人背靠着背，无话可讲+'+str(num))
+        #weibo.forward(4347121438538319,'期待郁可唯这张专辑+'+str(num))
+        time.sleep(180)
+   
+
     
