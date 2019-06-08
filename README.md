@@ -6,4 +6,5 @@ A script to forward weibo continuously for Yisa Yu
 
 # To Do List
 - [ ] auto-comment
-- [ ] automated OCR ReCaptcha 
+- [ ] automated OCR ReCaptcha
+- [ ] dynamic IP
